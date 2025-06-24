@@ -1,0 +1,11 @@
+import axios from 'axios';
+
+const instance = axios.create({
+  baseURL: 'http://localhost:8080/api',
+  auth: {
+    username: 'user',
+    password: 'pass',
+  },
+});
+
+export default instance;
