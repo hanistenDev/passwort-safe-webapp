@@ -12,7 +12,6 @@ public class ResetToken {
 
     @Id
     private String token;
-
     private String username;
     private LocalDateTime expiryDate;
 

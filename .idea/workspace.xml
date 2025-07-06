@@ -5,21 +5,53 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0bfca98f-795e-4aa5-b5e4-bdeffe70e93f" name="Changes" comment="commit new frontend">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/scr/main/java/com/passwordsafe/PasswordSafeApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/scr/main/java/com/passwordsafe/config/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/scr/main/java/com/passwordsafe/controller/PasswordController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/scr/main/java/com/passwordsafe/model/PasswordEntry.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/scr/main/java/com/passwordsafe/repository/PasswordRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/scr/main/java/com/passwordsafe/service/PasswordService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/scr/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/ch/bbw/PasswordSafeApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/bbw/PasswordSafeApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/ch/bbw/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/bbw/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/ch/bbw/controller/PasswordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/bbw/controller/PasswordController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/ch/bbw/controller/PasswordResetController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/ch/bbw/model/PasswordEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/bbw/model/PasswordEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/ch/bbw/model/ResetToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/bbw/model/ResetToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/ch/bbw/repository/PasswordRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/bbw/repository/PasswordRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/ch/bbw/repository/ResetTokenRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/bbw/repository/ResetTokenRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/ch/bbw/service/PasswordResetService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/bbw/service/PasswordResetService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/ch/bbw/service/PasswordService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/bbw/service/PasswordService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/ch/bbw/service/ResetTokenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/bbw/service/ResetTokenService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/ch/bbw/util/AESUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/bbw/util/AESUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/frontend" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectId" id="2zGdBqCP9okwgDxMX040wuWIqhf" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -28,15 +60,25 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "<unknown>",
-    "last_opened_file_path": "C:/Users/nadee/OneDrive - bbw.ch/Desktop/passwort-safe-webapp",
-    "node.js.selected.package.tslint": "(autodetect)"
+    "last_opened_file_path": "C:/Users/nadee/Downloads/passwort-safe-webapp",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\nadee\Downloads\passwort-safe-webapp" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.PasswordSafeApplication">
     <configuration name="PasswordSafeApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.passwordsafe.PasswordSafeApplication" />
       <module name="passwort-safe-webapp" />
@@ -46,6 +88,13 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PasswordSafeApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="passwort-safe-webapp" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="ch.bbw.PasswordSafeApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -65,6 +114,7 @@
       <option name="presentableId" value="Default" />
       <updated>1751361210526</updated>
       <workItem from="1751361212015" duration="68000" />
+      <workItem from="1751807341834" duration="2732000" />
     </task>
     <task id="LOCAL-00001" summary="commit new frontend">
       <option name="closed" value="true" />
