@@ -1,38 +1,298 @@
-.App {
-  text-align: center;
+/* Modern design system */
+:root {
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --success: #22c55e;
+    --danger: #ef4444;
+    --background: #f8fafc;
+    --surface: #ffffff;
+    --text: #1e293b;
+    --text-light: #64748b;
+    --border: #e2e8f0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Base styles */
+body {
+    background: var(--background);
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    line-height: 1.6;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Container styles */
+.app-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: var(--surface);
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                0 2px 4px -2px rgba(0, 0, 0, 0.05);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Header styles */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border);
 }
 
-.App-link {
-  color: #61dafb;
+.app-header h1 {
+    margin: 0;
+    color: var(--primary);
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.logout-button {
+    background-color: var(--danger);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.75rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.logout-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+}
+
+/* Navigation styles */
+.nav-buttons {
+    margin-bottom: 2.5rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-button {
+    padding: 0.75rem 1.75rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: #f1f5f9;
+    color: var(--text);
+}
+
+.nav-button:not(:disabled):hover {
+    background-color: #e2e8f0;
+    transform: translateY(-1px);
+}
+
+.nav-button:disabled {
+    background-color: var(--primary);
+    color: white;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+}
+
+/* Form styles */
+.password-form {
+    background-color: #f8fafc;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2.5rem;
+    border: 1px solid var(--border);
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    background-color: var(--surface);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+/* New styles for textarea */
+textarea.form-input {
+    resize: vertical;
+    min-height: 80px;
+    font-family: inherit;
+}
+
+/* New styles for select */
+select.form-input {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+    padding-right: 2.5rem;
+}
+
+.add-button {
+    background-color: var(--success);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.75rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.add-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25);
+}
+
+/* Category styles */
+.category-section {
+    margin-bottom: 2.5rem;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.category-title {
+    color: var(--text);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border);
+}
+
+/* Password list styles */
+.password-list {
+    margin-top: 1rem;
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+}
+
+.password-item {
+    background-color: var(--surface);
+    padding: 1.25rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.password-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+    border-color: var(--primary);
+}
+
+.password-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.password-info strong {
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.password-info span {
+    color: var(--text);
+}
+
+/* New style for notes */
+.note-text {
+    font-style: italic;
+    color: var(--text-light) !important;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    background: #f8fafc;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+}
+
+.toggle-button {
+    padding: 0.625rem 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.875rem;
+    font-weight: 500;
+    white-space: nowrap;
+    margin-left: 1rem;
+}
+
+.toggle-button.hidden {
+    background-color: #f0fdf4;
+    color: var(--success);
+    border-color: #bbf7d0;
+}
+
+.toggle-button.visible {
+    background-color: #fef2f2;
+    color: var(--danger);
+    border-color: #fecaca;
+}
+
+.toggle-button:hover {
+    transform: translateY(-1px);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .app-container {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    .app-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .nav-buttons {
+        flex-direction: column;
+    }
+
+    .password-info {
+        gap: 0.75rem;
+    }
+
+    .password-item {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .toggle-button {
+        width: 100%;
+        margin: 0.5rem 0 0 0;
+    }
 }

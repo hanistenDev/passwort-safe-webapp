@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "./api";
-import PasswordReset from "./PasswordReset";
+import ChangePassword from "./ChangePassword";
+import Login from "./Login";
+import { logout } from "./api";
+import CryptoJS from 'crypto-js';
+import './App.css';
 
 function App() {
     const [entries, setEntries] = useState([]);
@@ -8,106 +12,228 @@ function App() {
     const [url, setUrl] = useState("");
     const [username, setUsername] = useState("");
     const [passwort, setPasswort] = useState("");
-    const [view, setView] = useState("list"); // 'list' oder 'reset'
+    const [email, setEmail] = useState("");
+    const [note, setNote] = useState("");
+    const [category, setCategory] = useState("Allgemein");
+    const [view, setView] = useState("list");
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [visiblePasswords, setVisiblePasswords] = useState(new Set());
+
+    // categories
+    const categories = ["Allgemein", "Privat", "Geschäft", "Games", "Hobbies", "Social Media", "Banking"];
+
+    const hashPassword = (password) => {
+        return CryptoJS.SHA256(password).toString();
+    };
+
+    const togglePasswordVisibility = (id) => {
+        setVisiblePasswords(prev => {
+            const newSet = new Set(prev);
+            if (newSet.has(id)) {
+                newSet.delete(id);
+            } else {
+                newSet.add(id);
+            }
+            return newSet;
+        });
+    };
+
+    const fetchPasswords = async () => {
+        try {
+            const res = await axios.get("/passwords");
+            setEntries(res.data);
+            setVisiblePasswords(new Set());
+        } catch (error) {
+            console.error("Error fetching passwords:", error);
+            setEntries([]);
+        }
+    };
 
     useEffect(() => {
-        if (view === "list") {
-            axios
-                .get("/passwords")
-                .then((res) => setEntries(res.data))
-                .catch(() => setEntries([]));
+        if (isAuthenticated && view === "list") {
+            fetchPasswords();
         }
-    }, [view]);
+    }, [view, isAuthenticated]);
+
+    const handleLogout = () => {
+        logout();
+        setIsAuthenticated(false);
+        setEntries([]);
+        setVisiblePasswords(new Set());
+        setView("list");
+    };
+
+    const handleViewChange = (newView) => {
+        setView(newView);
+        if (newView === "list" && isAuthenticated) {
+            fetchPasswords();
+        }
+    };
+
+    const handlePasswordChangeSuccess = () => {
+        handleLogout();
+    };
 
     const addEntry = async () => {
         if (!label || !url || !username || !passwort) {
-            alert("Bitte alle Felder ausfüllen!");
+            alert("Bitte alle Pflichtfelder ausfüllen!");
             return;
         }
         try {
-            const res = await axios.post("/passwords", {
+            await axios.post("/passwords", {
                 label,
                 url,
                 username,
                 password: passwort,
+                email,
+                note,
+                category
             });
-            setEntries([...entries, res.data]);
+            await fetchPasswords();
             setLabel("");
             setUrl("");
             setUsername("");
             setPasswort("");
+            setEmail("");
+            setNote("");
+            setCategory("Allgemein");
         } catch (error) {
             alert("Fehler beim Hinzufügen: " + error.message);
         }
     };
 
-    return (
-        <div style={{ maxWidth: 600, margin: "auto", padding: 20 }}>
-            <h1>Passwort Safe</h1>
+    // Group entries by category
+    const groupedEntries = entries.reduce((groups, entry) => {
+        const category = entry.category || "Allgemein";
+        if (!groups[category]) {
+            groups[category] = [];
+        }
+        groups[category].push(entry);
+        return groups;
+    }, {});
 
-            <nav style={{ marginBottom: 20 }}>
+    if (!isAuthenticated) {
+        return <Login onLogin={() => setIsAuthenticated(true)} />;
+    }
+
+    return (
+        <div className="app-container">
+            <div className="app-header">
+                <h1>Passwort Safe</h1>
+                <button 
+                    onClick={handleLogout}
+                    className="logout-button"
+                >
+                    Abmelden
+                </button>
+            </div>
+
+            <nav className="nav-buttons">
                 <button
-                    onClick={() => setView("list")}
+                    onClick={() => handleViewChange("list")}
                     disabled={view === "list"}
-                    style={{ marginRight: 10, padding: "8px 16px" }}
+                    className="nav-button"
                 >
                     Passwort-Liste
                 </button>
                 <button
-                    onClick={() => setView("reset")}
-                    disabled={view === "reset"}
-                    style={{ padding: "8px 16px" }}
+                    onClick={() => handleViewChange("change-password")}
+                    disabled={view === "change-password"}
+                    className="nav-button"
                 >
-                    Passwort zurücksetzen
+                    Passwort ändern
                 </button>
             </nav>
 
             {view === "list" && (
                 <>
-                    <input
-                        placeholder="Label"
-                        value={label}
-                        onChange={(e) => setLabel(e.target.value)}
-                        style={{ display: "block", marginBottom: 10, width: "100%", padding: 8 }}
-                    />
-                    <input
-                        placeholder="URL"
-                        value={url}
-                        onChange={(e) => setUrl(e.target.value)}
-                        style={{ display: "block", marginBottom: 10, width: "100%", padding: 8 }}
-                    />
-                    <input
-                        placeholder="Username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        style={{ display: "block", marginBottom: 10, width: "100%", padding: 8 }}
-                    />
-                    <input
-                        placeholder="Passwort"
-                        value={passwort}
-                        onChange={(e) => setPasswort(e.target.value)}
-                        type="password"
-                        style={{ display: "block", marginBottom: 10, width: "100%", padding: 8 }}
-                    />
+                    <div className="password-form">
+                        <select
+                            className="form-input"
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}
+                        >
+                            {categories.map(cat => (
+                                <option key={cat} value={cat}>{cat}</option>
+                            ))}
+                        </select>
+                        <input
+                            className="form-input"
+                            placeholder="Label *"
+                            value={label}
+                            onChange={(e) => setLabel(e.target.value)}
+                        />
+                        <input
+                            className="form-input"
+                            placeholder="URL *"
+                            value={url}
+                            onChange={(e) => setUrl(e.target.value)}
+                        />
+                        <input
+                            className="form-input"
+                            placeholder="Username *"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                        <input
+                            className="form-input"
+                            placeholder="Passwort *"
+                            value={passwort}
+                            onChange={(e) => setPasswort(e.target.value)}
+                            type="password"
+                        />
+                        <input
+                            className="form-input"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            type="email"
+                        />
+                        <textarea
+                            className="form-input"
+                            placeholder="Notizen"
+                            value={note}
+                            onChange={(e) => setNote(e.target.value)}
+                            rows="3"
+                        />
+                        <button onClick={addEntry} className="add-button">
+                            Hinzufügen
+                        </button>
+                    </div>
 
-                    <button onClick={addEntry} style={{ padding: "10px 20px", fontSize: 16 }}>
-                        Hinzufügen
-                    </button>
-
-                    <ul style={{ marginTop: 20, listStyleType: "none", paddingLeft: 0 }}>
-                        {entries.map((entry) => (
-                            <li
-                                key={entry.id}
-                                style={{ marginBottom: 10, borderBottom: "1px solid #ddd", paddingBottom: 10 }}
-                            >
-                                <strong>{entry.label}</strong> | {entry.url} | {entry.username} | {entry.password}
-                            </li>
+                    <div className="password-categories">
+                        {Object.entries(groupedEntries).map(([category, categoryEntries]) => (
+                            <div key={category} className="category-section">
+                                <h2 className="category-title">{category}</h2>
+                                <ul className="password-list">
+                                    {categoryEntries.map((entry) => (
+                                        <li key={entry.id} className="password-item">
+                                            <div className="password-info">
+                                                <strong>{entry.label}</strong>
+                                                <span>{entry.url}</span>
+                                                <span>{entry.username}</span>
+                                                {entry.email && <span>{entry.email}</span>}
+                                                <span style={{ fontFamily: 'monospace' }}>
+                                                    {visiblePasswords.has(entry.id) ? hashPassword(entry.password) : "•".repeat(8)}
+                                                </span>
+                                                {entry.note && <span className="note-text">{entry.note}</span>}
+                                            </div>
+                                            <button
+                                                onClick={() => togglePasswordVisibility(entry.id)}
+                                                className={`toggle-button ${visiblePasswords.has(entry.id) ? 'visible' : 'hidden'}`}
+                                            >
+                                                {visiblePasswords.has(entry.id) ? "Verbergen" : "Anzeigen"}
+                                            </button>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
                         ))}
-                    </ul>
+                    </div>
                 </>
             )}
 
-            {view === "reset" && <PasswordReset />}
+            {view === "change-password" && <ChangePassword onSuccess={handlePasswordChangeSuccess} />}
         </div>
     );
 }
